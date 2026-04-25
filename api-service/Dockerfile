@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npx wait-on tcp:postgres:5432 && npm run migrate && npm run dev"]
+CMD ["sh", "-c", "npx wait-on tcp:postgres:5432 && npm run migrate && npm start"]
