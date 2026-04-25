@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   api-service:
     build: ./api-service
@@ -9,6 +7,7 @@ services:
       - "3000:3000"
     volumes:
       - ./api-service:/app
+      - api_node_modules:/app/node_modules
     depends_on:
       - kafka
       - redis
@@ -25,6 +24,7 @@ services:
       - "3001:3001"
     volumes:
       - ./search-service:/app
+      - search_node_modules:/app/node_modules
     depends_on:
       - kafka
       - redis
@@ -97,3 +97,5 @@ services:
 
 volumes:
   postgres_data:
+  api_node_modules:
+  search_node_modules:
