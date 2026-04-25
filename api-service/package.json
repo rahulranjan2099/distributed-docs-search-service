@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "migrate": "npx sequelize db:migrate --env development"
+    "migrate": "npx --yes sequelize-cli db:migrate --env development"
   },
   "keywords": [],
   "author": "",
