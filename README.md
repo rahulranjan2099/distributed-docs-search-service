@@ -142,6 +142,10 @@ npm install
 npm run dev
 ```
 
+## Postman collection:
+- login postman
+- import json file in postman that is available in root directory
+
 ## API Endpoints / Also added in postman collection docs.
 
 ### Tenants
