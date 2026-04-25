@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"first_name\":\"bhaskar\",\n    \"last_name\":\"singh\",\n    \"email\":\"bhaskar@gmail.com\"\n}",
+							"raw": "{\n    \"first_name\":\"rahul\",\n    \"last_name\":\"ranjan\",\n    \"email\":\"rahul@gmail.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
