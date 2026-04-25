@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "cb4a30df-72e2-4999-9b7a-b3f07d0e7242",
+		"name": "distributed-docs-search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15657566"
+	},
+	"item": [
+		{
+			"name": "tenants",
+			"item": [
+				{
+					"name": "http://localhost:3000/tenants/register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\":\"bhaskar\",\n    \"last_name\":\"singh\",\n    \"email\":\"bhaskar@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tenants/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tenants",
+								"register"
+							]
+						},
+						"description": "## Register Tenant\n\nRegisters a new tenant in the system by accepting basic personal information and returning the created tenant record.\n\n---\n\n## Request Details\n\n| Property | Value |\n| --- | --- |\n| **Method** | `POST` |\n| **URL** | `http://localhost:3000/tenants/register` |\n\n---\n\n## Request Body Parameters\n\nThe request body must be sent as JSON (`application/json`).\n\n| Field | Type | Required | Description |\n| --- | --- | --- | --- |\n| `first_name` | `string` | ✅ Yes | The first name of the tenant |\n| `last_name` | `string` | ✅ Yes | The last name of the tenant |\n| `email` | `string` | ✅ Yes | The email address of the tenant (used as a unique identifier) |\n\n---\n\n## Example Request Body\n\n``` json\n{\n  \"first_name\": \"rahul\",\n  \"last_name\": \"ranjan\",\n  \"email\": \"rahul@gmail.com\"\n}\n\n ```\n\n---\n\n## Example Response\n\n**Status:** `201 Created`\n\n``` json\n{\n  \"success\": true,\n  \"message\": \"Tenant registered successfully\",\n  \"data\": {\n    \"createdAt\": \"2026-04-25T11:41:24.035Z\",\n    \"updatedAt\": \"2026-04-25T11:41:24.035Z\",\n    \"id\": 2,\n    \"first_name\": \"rahul\",\n    \"last_name\": \"ranjan\",\n    \"email\": \"rahul@gmail.com\"\n  }\n}\n\n ```\n\n---\n\n## Response Fields\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `success` | `boolean` | Indicates whether the registration was successful |\n| `message` | `string` | A human-readable message describing the result |\n| `data.id` | `integer` | The unique identifier assigned to the newly created tenant |\n| `data.first_name` | `string` | The first name of the registered tenant |\n| `data.last_name` | `string` | The last name of the registered tenant |\n| `data.email` | `string` | The email address of the registered tenant |\n| `data.createdAt` | `string (ISO 8601)` | Timestamp of when the tenant record was created |\n| `data.updatedAt` | `string (ISO 8601)` | Timestamp of when the tenant record was last updated |"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/tenants/getAll",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tenants/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tenants",
+								"getAll"
+							]
+						},
+						"description": "Retrieves a list of all registered tenants along with their associated documents.\n\n## Request\n\n**Method:** GET  \n**URL:** `http://localhost:3000/tenants/getAll`\n\nNo request parameters, headers, or body required.\n\n## Response\n\nReturns a JSON object with the following structure:\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `success` | boolean | Indicates whether the request was successful |\n| `data` | array | List of tenant objects |\n\n### Tenant Object\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `id` | integer | Unique identifier for the tenant |\n| `first_name` | string | Tenant's first name |\n| `last_name` | string | Tenant's last name |\n| `email` | string | Tenant's email address |\n| `createdAt` | string (ISO 8601) | Timestamp when the tenant was created |\n| `updatedAt` | string (ISO 8601) | Timestamp when the tenant was last updated |\n| `documents` | array | List of documents associated with the tenant |\n\n### Document Object\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `id` | integer | Unique identifier for the document |\n| `file_name` | string | Name of the document file |\n| `file_size` | integer|null | Size of the file in bytes (null if unknown) |\n| `file_type` | string | MIME type or file type of the document |\n| `tenant_id` | integer | ID of the tenant this document belongs to |\n| `createdAt` | string (ISO 8601) | Timestamp when the document was created |\n| `updatedAt` | string (ISO 8601) | Timestamp when the document was last updated |\n\n## Example Response\n\n``` json\n{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 1,\n      \"first_name\": \"rahul\",\n      \"last_name\": \"ranjan\",\n      \"email\": \"rahul@gmail.com\",\n      \"createdAt\": \"2026-04-24T23:28:45.509Z\",\n      \"updatedAt\": \"2026-04-24T23:28:45.510Z\",\n      \"documents\": [\n        {\n          \"id\": 1,\n          \"file_name\": \"doc12\",\n          \"file_size\": null,\n          \"file_type\": \"unknown\",\n          \"tenant_id\": 1,\n          \"createdAt\": \"2026-04-24T23:28:56.845Z\",\n          \"updatedAt\": \"2026-04-24T23:28:56.845Z\"\n        }\n      ]\n    }\n  ]\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "search / docs",
+			"item": [
+				{
+					"name": "http://localhost:3001/search?tenant_id=1",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/search?tenant_id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "doc1",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "17",
+									"disabled": true
+								},
+								{
+									"key": "tenant_id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Search documents for a specific tenant using Elasticsearch.\n\nThis endpoint queries the Elasticsearch index to retrieve documents belonging to a given tenant. Results can be filtered by a search query string or a specific document ID.\n\n**Query Parameters:**\n\n| Parameter | Type | Required | Description |\n| --- | --- | --- | --- |\n| `tenant_id` | integer | Yes | The ID of the tenant whose documents should be searched. |\n| `q` | string | No | A search query string to filter documents by name. It uses **fuzzy search**. |\n| `id` | integer | No | Filter results by a specific document ID. |\n| `file_name` | string | No | Filter result by accurate file name. This is fast as compare to q parameter. |\n\n**Response:**\n\nReturns a JSON object with a `data` field containing:\n\n- `success` (boolean): Whether the search was successful.\n    \n- `total` (integer): Total number of matching documents.\n    \n- `data` (array): List of matching document objects, each containing:\n    \n    - `id`: Document ID.\n        \n    - `file_name`: Name of the file.\n        \n    - `file_size`: Size of the file (nullable).\n        \n    - `file_type`: Type/format of the file.\n        \n    - `tenant_id`: The tenant this document belongs to.\n        \n    - `createdAt` / `updatedAt`: Timestamps."
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/documents/",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"file_name\": \"doc21\",\n    \"tenant_id\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/documents/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"documents",
+								""
+							]
+						},
+						"description": "## Create Document\n\nCreates a new document record associated with a specific tenant.\n\n---\n\n### Request Body\n\nThe request body must be sent as raw JSON (`application/json`).\n\n| Field | Type | Required | Description |\n| --- | --- | --- | --- |\n| `file_name` | string | ✅ Yes | The name of the document/file to be created. |\n| `tenant_id` | string | ✅ Yes | The ID of the tenant to associate this document with. |\n\n**Example Request Body:**\n\n``` json\n{\n  \"file_name\": \"doc21\",\n  \"tenant_id\": \"2\"\n}\n\n ```\n\n---\n\n### Response\n\n#### ✅ 201 Created\n\nReturned when the document is successfully created.\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `success` | boolean | Indicates whether the request was successful. |\n| `message` | string | A human-readable message confirming the operation. |\n| `data` | object | The newly created document object. |\n| `data.id` | integer | Unique identifier for the created document. |\n| `data.file_name` | string | The name of the document as provided in the request. |\n| `data.file_size` | integer | null | The size of the file in bytes. `null` if not yet determined. |\n| `data.file_type` | string | The type/format of the file. Defaults to `\"unknown\"` if not detected. |\n| `data.tenant_id` | integer | The ID of the tenant this document belongs to. |\n| `data.createdAt` | string (ISO 8601) | Timestamp of when the document record was created. |\n| `data.updatedAt` | string (ISO 8601) | Timestamp of when the document record was last updated. |\n\n**Example Response Body:**\n\n``` json\n{\n  \"success\": true,\n  \"message\": \"Document created successfully\",\n  \"data\": {\n    \"id\": 3,\n    \"file_name\": \"doc21\",\n    \"file_size\": null,\n    \"file_type\": \"unknown\",\n    \"tenant_id\": 2,\n    \"createdAt\": \"2026-04-25T11:42:15.789Z\",\n    \"updatedAt\": \"2026-04-25T11:42:15.790Z\"\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/documents/3",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/documents/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"documents",
+								"3"
+							]
+						},
+						"description": "## Delete Document\n\nDeletes a specific document by its ID. This endpoint permanently removes the document from the system.\n\n---\n\n### URL Structure\n\n```\nDELETE http://localhost:3000/documents/:id\n\n ```\n\nThe path parameter `3` in the example URL represents the **document ID** — replace it with the ID of the document you wish to delete.\n\n| Path Parameter | Type | Description |\n| --- | --- | --- |\n| `id` | number | The unique identifier of the document to delete |\n\n---\n\n### Request Details\n\n- **Method:** `DELETE`\n    \n- **Request Body:** None required\n    \n\n---\n\n### Response\n\n#### 200 OK\n\nReturned when the document is successfully deleted.\n\n``` json\n{\n  \"success\": true,\n  \"message\": \"Document deleted successfully\"\n}\n\n ```\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `success` | boolean | Indicates whether the deletion succeeded |\n| `message` | string | A human-readable confirmation message |\n\n#### Notes\n\nCurrently there is no authorization to delete docs. Will add later."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "http://localhost:3001/health",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"health"
+					]
+				},
+				"description": "## Health Check\n\nChecks the overall health and availability of the service and its dependent infrastructure components.\n\n**Method:** `GET`\n**URL:** `http://localhost:3001/health`\n\n---\n\n### Request\n\nNo request body or parameters required.\n\n---\n\n### Response\n\n**Status:** `200 OK`\n\n```json\n{\n  \"status\": \"ok\",\n  \"services\": {\n    \"database\": \"up\",\n    \"redis\": \"up\",\n    \"elasticsearch\": \"up\",\n    \"kafka\": \"up\"\n  }\n}\n```\n\n#### Response Fields\n\n| Field | Type | Description |\n|---|---|---|\n| `status` | `string` | Overall health status of the service. `\"ok\"` indicates the service is running normally. |\n| `services` | `object` | A map of dependent services and their individual statuses. |\n| `services.database` | `string` | Status of the primary database connection. `\"up\"` means the database is reachable and operational. |\n| `services.redis` | `string` | Status of the Redis cache. `\"up\"` means Redis is reachable and operational. |\n| `services.elasticsearch` | `string` | Status of the Elasticsearch instance. `\"up\"` means it is reachable and operational. |\n| `services.kafka` | `string` | Status of the Kafka message broker. `\"up\"` means Kafka is reachable and operational. |\n\n---\n\n### Notes\n\n- This endpoint is typically used by load balancers, monitoring tools, or orchestration systems (e.g., Kubernetes liveness/readiness probes) to verify that the service and all its dependencies are healthy.\n- A `status` of `\"ok\"` with all services reporting `\"up\"` indicates a fully operational system.\n- If any dependent service is unavailable, its value may change to `\"down\"` or similar, and the overall `status` may reflect a degraded or unhealthy state."
+			},
+			"response": []
+		}
+	]
+}
