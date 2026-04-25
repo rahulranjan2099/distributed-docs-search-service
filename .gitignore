@@ -1,0 +1,4 @@
+api-service/node_modules
+search-service/node_modules
+api-service/.env
+search-service/.env
